@@ -1,20 +1,27 @@
 /*******************************************************************************
- * Sketch name: robot car with servo, scanner, RGB LED and OLED
- * Description: obstacle avoiding robot car with flashing LEDs and OLED display
- * Created :    October 2018
- * Author:      Neil Cameron
- * Book:        Applied Arduino: Comprehensive Projects for Everyday Electronics
- * Chapter :    Chapter 24 - Robot car
+ * Nombre del Sketch: robot car con servo, escáner, LED RGB
+ * Descripción: Robot coche evitador de obstáculos con LEDs parpadeantes
+ * Creado: Julio 2024
+ * Autor: Hernzum
+ * Versión: 1.0
+ *
+ * Configuración:
+ * - Conectar el servo al pin A1.
+ * - Conectar el sensor de ultrasonidos: pin de eco a A2 y pin de trigger a A3.
+ * - Conectar los LEDs: rojo al pin 10, verde al pin 12, azul al pin 13.
+ * - Conectar los motores: ENA al pin 11, ENB al pin 3, IN1 al pin 8, IN2 al pin 7, IN3 al pin 6, IN4 al pin 5.
+ * - Conectar el sensor táctil al pin 4.
+ * - Asegurarse de tener instaladas las librerías Servo y NewPing.
+ *
+ * Uso:
+ * - El robot se moverá hacia adelante mientras no haya obstáculos en su camino.
+ * - Cada 3 segundos, el robot se detendrá y escaneará su entorno para decidir la dirección a tomar.
+ * - Si detecta un obstáculo a menos de 10 cm, retrocederá, escaneará y girará hacia la dirección con más espacio.
+ * - Si se activa el sensor táctil, el robot se detendrá, escaneará y avanzará hacia adelante, luego girará a la izquierda.
  ******************************************************************************/
 
-#include <Servo.h>        // include Servo library
-Servo servo;        // associate servo with Servo library
-int servoPin = A1;        // servo motor pin
-#include <NewPing.h>      // include NewPing library
-int echoPin = A2;       // ultrasound echo pin
-int trigPin = A3;       // ultrasound trigger pin
-int maxdist = 70;       // set maximum scan distance (cm)
-NewPing sonar(trigPin, echoPin, maxdist); // associate sonar with NewPing library
+#include <Servo.h>
+#include <NewPing.h>
 
 int redLED = 10;        // red LED pin
 int greenLED = 12;        // green LED pin
